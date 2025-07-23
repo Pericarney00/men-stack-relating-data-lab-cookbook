@@ -10,6 +10,12 @@ const session = require("express-session")
 const MongoStore =require("connect-mongo")
 
 const authController = require("./controllers/auth.js")
+const foodsController = require("./controllers/foods.js")
+
+const isSignedIn = require('./middleware/is-signed-in.js');
+const passUserToView = require('./middleware/pass-user-to-view.js');
+
+
 
 
 // Set the port from environment variable or default to 3000
@@ -49,18 +55,11 @@ app.get("/", async(req, res) => {
 
 
 
-app.get("/vip-lounge", (req, res) => {
-  if (req.session.user) {
-    res.send(`Welcome to the party ${req.session.user.username}.`);
-  } else {
-    res.send("Sorry, no guests allowed.");
-  }
-});
 
-
-
-
+app.use(passUserToView);
 app.use("/auth", authController);
+app.use(isSignedIn);
+app.use("/users/:userId/foods", foodsController);
 
 
 
