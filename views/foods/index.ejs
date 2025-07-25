@@ -10,6 +10,16 @@
 
     <h1>Welcome to my Pantry</h1>
 
+      <ul>
+      <% pantry.forEach ((foods) => { %>
+      <a href="/users/<%= user._id %>/foods/<%= foods._id %>">
+          <li><%= foods.name %> </li>
+        </a>
+      <% }) %>
+      </ul>
+
+
+
 <a href="/users/:userId/foods/new">Add New Item</a>
 
 
