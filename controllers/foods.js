@@ -87,7 +87,7 @@ router.put("/:itemId", async (req, res) => {
 
     await currentUser.save()
 
-    res.redirect("/")
+    res.redirect(`/users/${currentUser._id}/foods/`)
   } catch (error) {
     console.log(error)
     res.redirect("/")

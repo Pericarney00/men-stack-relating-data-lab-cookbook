@@ -1,20 +1,18 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cookbook Community Pantries</title>
+  <title>Community Pantry</title>
 </head>
 <body>
   <%- include('../partials/_navbar.ejs') %>
-
-  <h1>Community Pantries</h1>
+  <h1><%= otherUser%>'s Pantry</h1>
   <ul>
-    <% allUsers.forEach((user) => { %>
-      <a href="/users/<%-user._id%>/">
-      <li><%= user.username %> </li>
-      </a>
+    <% pantry.forEach((foodItem) => { %>
+      
+      <li> <%= foodItem.name%> </li>
+      
     <% }) %>
   </ul>
 
