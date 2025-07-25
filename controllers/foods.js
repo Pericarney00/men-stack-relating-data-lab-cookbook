@@ -47,9 +47,36 @@ router.post("/", async (req, res) => {
 });
 
 // Show	‘/users/:userId/foods/:itemId’	GET
+router.get("/:itemId", async (req, res) => {
+  try {
+    const currentUser = await User.findById(req.session.user._id)
+
+    const food = currentUser.pantry.id(req.params.itemId)
+    console.log(food)
+    res.render("foods/show.ejs", {
+      food: food
+    })
+  } catch (error) {
+    console.log(error)
+    res.redirect("/")
+  }
+})
 // Edit	‘/users/:userId/foods/:itemId/edit’	GET
 // Update	‘/users/:userId/foods/:itemId’	PUT
 // Delete	‘/users/:userId/foods/:itemId’	DELETE
+router.delete("/:foodsId", async (req, res) => {
+  try {
+    const currentUser = await User.findById(req.session.user._id)
+    
+    currentUser.pantry.id(req.params.foodsId).deleteOne()
 
+    await currentUser.save()
+    res.redirect("/");
+
+  } catch (error) {
+    console.log(error)
+    res.redirect("/")
+  }
+})
 
 module.exports = router;
