@@ -51,10 +51,10 @@ router.get("/:itemId", async (req, res) => {
   try {
     const currentUser = await User.findById(req.session.user._id)
 
-    const food = currentUser.pantry.id(req.params.itemId)
-    console.log(food)
+    const foodItem = currentUser.pantry.id(req.params.itemId)
+    console.log(foodItem)
     res.render("foods/show.ejs", {
-      food: food
+      food: foodItem
     })
   } catch (error) {
     console.log(error)
@@ -62,6 +62,20 @@ router.get("/:itemId", async (req, res) => {
   }
 })
 // Edit	‘/users/:userId/foods/:itemId/edit’	GET
+router.get("/:itemId/edit", async (req, res) => {
+  try {
+    const currentUser = await User.findById(req.session.user._id)
+
+    const foodItem = currentUser.pantry.id(req.params.itemId)
+
+    res.render("foods/edit.ejs", {
+      food: foodItem
+    })
+  } catch (error) {
+    console.log(error)
+    res.redirect("/")
+  }
+})
 // Update	‘/users/:userId/foods/:itemId’	PUT
 // Delete	‘/users/:userId/foods/:itemId’	DELETE
 router.delete("/:foodsId", async (req, res) => {

@@ -10,9 +10,11 @@
 
     <h1><%= food.name %></h1>
 
+    
+<a href="/users/<%= user._id %>/foods/<%= food._id %>/edit"><button>Edit this food item</button></a>
 
 
-<form 
+    <form 
     action="/users/<%= user._id %>/foods/<%= food._id %>?_method=DELETE" 
     method="POST"
     >
