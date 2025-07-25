@@ -77,6 +77,23 @@ router.get("/:itemId/edit", async (req, res) => {
   }
 })
 // Update	‘/users/:userId/foods/:itemId’	PUT
+router.put("/:itemId", async (req, res) => {
+  try {
+    const currentUser = await User.findById(req.session.user._id)
+
+    const foodItem = currentUser.pantry.id(req.params.itemId)
+    
+    foodItem.set(req.body)
+
+    await currentUser.save()
+
+    res.redirect("/")
+  } catch (error) {
+    console.log(error)
+    res.redirect("/")
+  }
+})
+
 // Delete	‘/users/:userId/foods/:itemId’	DELETE
 router.delete("/:foodsId", async (req, res) => {
   try {

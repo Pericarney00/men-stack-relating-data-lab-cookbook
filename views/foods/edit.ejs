@@ -9,7 +9,7 @@
   <%- include('../partials/_navbar.ejs') %>
 
   <h1>Edit Food Item</h1>
-  <form action="/users/<%= user._id %>/foods" method="POST">
+  <form action="/users/<%= user._id %>/foods/<%= food._id %>?_method=PUT" method="POST">
     <label for="name">Name:</label>
     <input type="text" name="name" id="name" value="<%= food.name %>">
 
